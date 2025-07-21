@@ -76,18 +76,18 @@ def fit_function(data, iterations=10000):
 
     p0 = [
         1,    # R0
-        1,    # R1
+        0.2,    # R1
         4,  # Q1
         0.8,   # n1
-        1,    # R2
+        0.5,    # R2
         4,  # Q2
         0.8,   # n2
         1,    # W
-        1e-8,  # L 电感
+        1e-7,  # L 电感
     ]
     bounds = (
-    [0, 0.005, 0, 0, 0, 0, 0, 0, 0],         # 所有参数下限
-    [np.inf, np.inf, 15, 1, np.inf, 15, 1, 15, 1e-2]  # 上限，n1/n2最大为1
+    [0, 0.0005, 0, 0, 0.0005, 0, 0, 0.001, 0],         # 所有参数下限
+    [np.inf, 10, 10, 1, np.inf, 10, 1, 15, 1e-4]  # 上限，n1/n2最大为1
 )
 
     # 拟合
@@ -119,8 +119,8 @@ def plot_fit_comparison(data, my_params):
     plt.title("Nyquist 拟合对比", fontproperties=chinese_font)
     plt.axis('equal')
     plt.show()
-# 示例：加载NCA电池的第一个工作表并拟合
-battery_type = 'NCA'
+# 示例：加载NCM电池的第一个工作表并拟合
+battery_type = 'NCM'
 file_name = 'CY25_0.5_1.xlsx'
 sheets = load_impedance_data(battery_type, file_name)
 # if sheets:
